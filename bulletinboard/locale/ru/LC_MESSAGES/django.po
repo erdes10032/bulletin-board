@@ -1,0 +1,820 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 17:31+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\board\adapters.py:74
+msgid "This email is already registered."
+msgstr "Этот email уже зарегистрирован."
+
+#: .\board\filters.py:11 .\board\forms.py:25 .\templates\posts.html:20
+msgid "Title"
+msgstr "Заголовок"
+
+#: .\board\filters.py:17 .\board\forms.py:24 .\templates\post.html:16
+msgid "Category"
+msgstr "Категория"
+
+#: .\board\filters.py:23 .\board\filters.py:48
+msgid "Creation date after"
+msgstr "Дата создания после"
+
+#: .\board\filters.py:36
+msgid "Post"
+msgstr "Объявление"
+
+#: .\board\filters.py:42 .\board\forms.py:13 .\board\forms.py:108
+#: .\templates\post.html:38 .\templates\posts.html:22
+#: .\templates\responses.html:19
+msgid "Text"
+msgstr "Текст"
+
+#: .\board\forms.py:33
+msgid "The title cannot be identical to the text"
+msgstr "Заголовок не может совпадать с текстом"
+
+#: .\board\forms.py:38
+msgid "The title must begin with a big letter"
+msgstr "Заголовок должен начинаться с заглавной буквы"
+
+#: .\board\forms.py:45 .\board\forms.py:46 .\board\forms.py:76
+#: .\templates\profile.html:19
+msgid "First Name"
+msgstr "Имя"
+
+#: .\board\forms.py:50 .\board\forms.py:51 .\board\forms.py:77
+#: .\templates\profile.html:20
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: .\board\forms.py:55 .\board\forms.py:83 .\templates\profile.html:22
+msgid "Gender"
+msgstr "Пол"
+
+#: .\board\forms.py:59 .\templates\profile.html:11
+msgid "Avatar"
+msgstr "Аватар"
+
+#: .\board\forms.py:61
+msgid "Upload your profile picture"
+msgstr "Загрузите ваше фото профиля"
+
+#: .\board\forms.py:84
+msgid "Profile Picture"
+msgstr "Фото профиля"
+
+#: .\board\models.py:9
+msgid "Tank"
+msgstr "Танк"
+
+#: .\board\models.py:10
+msgid "Heal"
+msgstr "Лекарь"
+
+#: .\board\models.py:11
+msgid "Damage dealer"
+msgstr "Боец"
+
+#: .\board\models.py:12
+msgid "Vendor"
+msgstr "Торговец"
+
+#: .\board\models.py:13
+msgid "Guildmaster"
+msgstr "Гильдмастер"
+
+#: .\board\models.py:14
+msgid "Questgiver"
+msgstr "Квестодатель"
+
+#: .\board\models.py:15
+msgid "Blacksmith"
+msgstr "Кузнец"
+
+#: .\board\models.py:16
+msgid "Leatherworker"
+msgstr "Кожевник"
+
+#: .\board\models.py:17
+msgid "Potion maker"
+msgstr "Зельевар"
+
+#: .\board\models.py:18
+msgid "Spell master"
+msgstr "Мастер заклинаний"
+
+#: .\board\models.py:22
+msgid "Male"
+msgstr "Мужской"
+
+#: .\board\models.py:23
+msgid "Female"
+msgstr "Женский"
+
+#: .\board\models.py:27
+msgid "Accepted"
+msgstr "Принят"
+
+#: .\board\models.py:28
+msgid "In anticipation"
+msgstr "В ожидании"
+
+#: .\board\models.py:29
+msgid "Rejected"
+msgstr "Отклонён"
+
+#: .\board\views.py:116 .\board\views.py:141 .\board\views.py:161
+msgid "post"
+msgstr "объявление"
+
+#: .\board\views.py:131
+msgid "You can edit only your own posts"
+msgstr "Вы можете редактировать только свои собственные объявления"
+
+#: .\board\views.py:156 .\board\views.py:296
+msgid "You can delete only your own posts"
+msgstr "Вы можете удалять только свои собственные объявления"
+
+#: .\board\views.py:250 .\board\views.py:277 .\board\views.py:304
+msgid "response"
+msgstr "отклик"
+
+#: .\board\views.py:269
+msgid "You can edit only your own responses"
+msgstr "Вы можете редактировать только свои собственные отклики"
+
+#: .\board\views.py:320
+msgid "Only post author can accept responses"
+msgstr "Только автор объявления может принимать отклики"
+
+#: .\board\views.py:324
+msgid "Your response has been accepted"
+msgstr "Ваш отклик был принят"
+
+#: .\board\views.py:325
+#, python-format
+msgid "Your response to post \"%s\" has been accepted by the author."
+msgstr "Ваш отклик на объявление \"%s\" был принят автором."
+
+#: .\board\views.py:337
+msgid "Only post author can reject responses"
+msgstr "Только автор объявления может отклонять отклики"
+
+#: .\templates\account\account_inactive.html:6
+msgid "Account Inactive"
+msgstr "Аккаунт неактивен"
+
+#: .\templates\account\account_inactive.html:11
+msgid "This account is inactive."
+msgstr "Этот аккаунт неактивен."
+
+#: .\templates\account\base_confirm_code.html:12
+msgid "Email Verification"
+msgstr "Подтверждение email"
+
+#: .\templates\account\base_confirm_code.html:18
+msgid ""
+"\n"
+"                            We've sent a verification code to:\n"
+"                        "
+msgstr ""
+"\n"
+"                            Мы отправили код подтверждения на:\n"
+"                        "
+
+#: .\templates\account\base_confirm_code.html:32
+msgid "Enter verification code"
+msgstr "Введите код подтверждения"
+
+#: .\templates\account\base_confirm_code.html:39
+msgid "6-digit code"
+msgstr "6-значный код"
+
+#: .\templates\account\base_confirm_code.html:44
+msgid "Verify"
+msgstr "Подтвердить"
+
+#: .\templates\account\base_confirm_code.html:51
+msgid "Use a different email address"
+msgstr "Использовать другой email адрес"
+
+#: .\templates\account\base_reauthenticate.html:6
+msgid "Confirm Access"
+msgstr "Подтверждение доступа"
+
+#: .\templates\account\base_reauthenticate.html:11
+msgid "Please reauthenticate to safeguard your account."
+msgstr "Пожалуйста, повторно подтвердите свою личность для защиты аккаунта."
+
+#: .\templates\account\base_reauthenticate.html:17
+msgid "Alternative options"
+msgstr "Альтернативные варианты"
+
+#: .\templates\account\confirm_login_code.html:6
+msgid "Enter Sign-In Code"
+msgstr "Введите код для входа"
+
+#: .\templates\account\confirm_login_code.html:14
+msgid "Enter Verification Code"
+msgstr "Введите код подтверждения"
+
+#: .\templates\account\confirm_login_code.html:18
+#: .\templates\account\confirm_login_code.html:24
+msgid "We've sent a verification code to:"
+msgstr "Мы отправили код подтверждения на:"
+
+#: .\templates\account\confirm_login_code.html:20
+#: .\templates\account\confirm_login_code.html:26
+msgid "Please check your inbox and enter the code below."
+msgstr "Пожалуйста, проверьте вашу почту и введите код ниже."
+
+#: .\templates\account\confirm_login_code.html:30
+msgid "No email address found for verification."
+msgstr "Не найден email адрес для подтверждения."
+
+#: .\templates\account\confirm_login_code.html:32
+msgid "Return to Login"
+msgstr "Вернуться к входу"
+
+#: .\templates\account\confirm_login_code.html:41
+msgid "Verification Code"
+msgstr "Код подтверждения"
+
+#: .\templates\account\confirm_login_code.html:43
+msgid "Enter 6-digit code"
+msgstr "Введите 6-значный код"
+
+#: .\templates\account\confirm_login_code.html:53
+msgid "Verify Code"
+msgstr "Подтвердить код"
+
+#: .\templates\account\email.html:5
+msgid "Email Addresses"
+msgstr "Email адреса"
+
+#: .\templates\account\email.html:11
+msgid "The following email addresses are associated with your account:"
+msgstr "С вашим аккаунтом связаны следующие email адреса:"
+
+#: .\templates\account\email.html:24
+msgid "Verified"
+msgstr "Подтверждён"
+
+#: .\templates\account\email.html:28
+msgid "Unverified"
+msgstr "Не подтверждён"
+
+#: .\templates\account\email.html:33
+msgid "Primary"
+msgstr "Основной"
+
+#: .\templates\account\email.html:43
+msgid "Make Primary"
+msgstr "Сделать основным"
+
+#: .\templates\account\email.html:46 .\templates\account\email_change.html:39
+msgid "Re-send Verification"
+msgstr "Отправить подтверждение повторно"
+
+#: .\templates\account\email.html:49
+#: .\templates\socialaccount\connections.html:39
+msgid "Remove"
+msgstr "Удалить"
+
+#: .\templates\account\email.html:58
+msgid "Add Email Address"
+msgstr "Добавить email адрес"
+
+#: .\templates\account\email.html:69
+msgid "Add Email"
+msgstr "Добавить email"
+
+#: .\templates\account\email.html:79
+msgid "Do you really want to remove the selected email address?"
+msgstr "Вы действительно хотите удалить выбранный email адрес?"
+
+#: .\templates\account\email\email_confirmation_signup_message.html:16
+msgid ""
+"Your sign-in code is listed below. Please enter it in your open browser "
+"window."
+msgstr "Ваш код для входа указан ниже. Пожалуйста, введите его в открытом окне браузера."
+
+#: .\templates\account\email\email_confirmation_signup_message.html:20
+msgid "This mail can be safely ignored if you did not initiate this action."
+msgstr "Это письмо можно спокойно игнорировать, если вы не инициировали это действие."
+
+#: .\templates\account\email_change.html:6
+#: .\templates\account\email_change.html:11
+msgid "Email Address"
+msgstr "Email адрес"
+
+#: .\templates\account\email_change.html:23
+#: .\templates\account\email_change.html:31
+msgid "Current email"
+msgstr "Текущий email"
+
+#: .\templates\account\email_change.html:33
+msgid "Changing to"
+msgstr "Изменение на"
+
+#: .\templates\account\email_change.html:37
+msgid "Your email address is still pending verification."
+msgstr "Ваш email адрес всё ещё ожидает подтверждения."
+
+#: .\templates\account\email_change.html:43
+msgid "Cancel Change"
+msgstr "Отменить изменение"
+
+#: .\templates\account\email_change.html:51
+msgid "Change to"
+msgstr "Изменить на"
+
+#: .\templates\account\email_change.html:57
+msgid "Change Email"
+msgstr "Изменить email"
+
+#: .\templates\account\email_confirm.html:7
+msgid "Confirm Email Address"
+msgstr "Подтвердить email адрес"
+
+#: .\templates\account\email_confirm.html:15
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an email "
+"address for user %(user_display)s."
+msgstr "Пожалуйста, подтвердите, что <a href=\"mailto:%(email)s\">%(email)s</a> является email адресом пользователя %(user_display)s."
+
+#: .\templates\account\email_confirm.html:23
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: .\templates\account\email_confirm.html:29
+#, python-format
+msgid ""
+"Unable to confirm %(email)s because it is already confirmed by a different "
+"account."
+msgstr "Невозможно подтвердить %(email)s, так как он уже подтверждён другим аккаунтом."
+
+#: .\templates\account\email_confirm.html:35
+#, python-format
+msgid ""
+"This email confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new email confirmation request</a>."
+msgstr "Ссылка для подтверждения email устарела или недействительна. Пожалуйста, <a href=\"%(email_url)s\">запросите новое подтверждение email</a>."
+
+#: .\templates\account\login.html:6 .\templates\account\login.html:30
+msgid "Sign In"
+msgstr "Вход"
+
+#: .\templates\account\login.html:18
+#, python-format
+msgid ""
+"If you have not created an account yet, then please %(link)ssign "
+"up%(end_link)s first."
+msgstr "Если вы ещё не создали аккаунт, то сначала, пожалуйста, %(link)sзарегистрируйтесь%(end_link)s."
+
+#: .\templates\account\login.html:41
+msgid "Sign in with a passkey"
+msgstr "Войти с помощью ключа доступа"
+
+#: .\templates\account\login.html:46
+#: .\templates\account\request_login_code.html:6
+msgid "Send me a sign-in code"
+msgstr "Отправьте мне код для входа"
+
+#: .\templates\account\logout.html:5 .\templates\account\logout.html:20
+msgid "Sign Out"
+msgstr "Выход"
+
+#: .\templates\account\logout.html:10
+msgid "Are you sure you want to sign out?"
+msgstr "Вы уверены, что хотите выйти?"
+
+#: .\templates\account\password_change.html:5
+#: .\templates\account\password_change.html:19
+#: .\templates\account\password_reset_from_key.html:9
+#: .\templates\account\password_reset_from_key.html:29
+#: .\templates\account\password_reset_from_key_done.html:6
+msgid "Change Password"
+msgstr "Изменить пароль"
+
+#: .\templates\account\password_change.html:21
+msgid "Forgot Password?"
+msgstr "Забыли пароль?"
+
+#: .\templates\account\password_reset.html:5
+#: .\templates\account\password_reset_done.html:7
+msgid "Password Reset"
+msgstr "Сброс пароля"
+
+#: .\templates\account\password_reset.html:13
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+msgstr "Забыли пароль? Введите ваш email адрес ниже, и мы отправим вам письмо для сброса пароля."
+
+#: .\templates\account\password_reset.html:25
+msgid "Reset My Password"
+msgstr "Сбросить мой пароль"
+
+#: .\templates\account\password_reset.html:30
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr "Пожалуйста, свяжитесь с нами, если у вас возникли проблемы со сбросом пароля."
+
+#: .\templates\account\password_reset_done.html:15
+msgid ""
+"We have sent you an email. If you have not received it please check your "
+"spam folder. Otherwise contact us if you do not receive it in a few minutes."
+msgstr "Мы отправили вам письмо. Если вы не получили его, пожалуйста, проверьте папку спам. В противном случае свяжитесь с нами, если не получите его в течение нескольких минут."
+
+#: .\templates\account\password_reset_from_key.html:7
+msgid "Bad Token"
+msgstr "Неверный токен"
+
+#: .\templates\account\password_reset_from_key.html:17
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr "Ссылка для сброса пароля недействительна, возможно, потому что уже была использована. Пожалуйста, запросите <a href=\"%(passwd_reset_url)s\">новый сброс пароля</a>."
+
+#: .\templates\account\password_reset_from_key.html:32
+msgid "Cancel"
+msgstr "Отмена"
+
+#: .\templates\account\password_reset_from_key_done.html:11
+msgid "Your password is now changed."
+msgstr "Ваш пароль теперь изменён."
+
+#: .\templates\account\password_set.html:6
+#: .\templates\account\password_set.html:20
+msgid "Set Password"
+msgstr "Установить пароль"
+
+#: .\templates\account\request_login_code.html:11
+msgid "You will receive a special code for a password-free sign-in."
+msgstr "Вы получите специальный код для входа без пароля."
+
+#: .\templates\account\request_login_code.html:23
+msgid "Request Code"
+msgstr "Запросить код"
+
+#: .\templates\account\request_login_code.html:29
+msgid "Other sign-in options"
+msgstr "Другие варианты входа"
+
+#: .\templates\account\signup.html:4 .\templates\account\signup.html:97
+#: .\templates\account\signup_by_passkey.html:28
+#: .\templates\socialaccount\signup.html:6
+#: .\templates\socialaccount\signup.html:24
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#: .\templates\account\signup.html:8
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr "Уже есть аккаунт? Тогда, пожалуйста, <a href=\"%(login_url)s\">войдите</a>."
+
+#: .\templates\account\signup_by_passkey.html:5
+msgid "Passkey Sign Up"
+msgstr "Регистрация с ключом доступа"
+
+#: .\templates\account\signup_by_passkey.html:16
+#, python-format
+msgid "Already have an account? Then please %(link)ssign in%(end_link)s."
+msgstr "Уже есть аккаунт? Тогда, пожалуйста, %(link)sвойдите%(end_link)s."
+
+#: .\templates\account\signup_by_passkey.html:35
+msgid "Other options"
+msgstr "Другие варианты"
+
+#: .\templates\account\signup_closed.html:6
+msgid "Sign Up Closed"
+msgstr "Регистрация закрыта"
+
+#: .\templates\account\signup_closed.html:11
+msgid "We are sorry, but the sign up is currently closed."
+msgstr "Мы сожалеем, но регистрация в настоящее время закрыта."
+
+#: .\templates\account\verified_email_required.html:6
+msgid "Verify Your Email Address"
+msgstr "Подтвердите ваш email адрес"
+
+#: .\templates\account\verified_email_required.html:12
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your email address. "
+msgstr ""
+"Эта часть сайта требует от нас подтверждения того,\n"
+"что вы являетесь тем, за кого себя выдаёте. Для этого мы требуем,\n"
+"чтобы вы подтвердили владение вашим email адресом. "
+
+#: .\templates\account\verified_email_required.html:17
+msgid ""
+"We have sent an email to you for\n"
+"verification. Please click on the link inside that email. If you do not see "
+"the verification email in your main inbox, check your spam folder. "
+"Otherwise\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+"Мы отправили вам письмо для подтверждения.\n"
+"Пожалуйста, перейдите по ссылке в этом письме. Если вы не видите письмо\n"
+"с подтверждением во входящих, проверьте папку спам. В противном случае\n"
+"свяжитесь с нами, если не получите его в течение нескольких минут."
+
+#: .\templates\account\verified_email_required.html:22
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your "
+"email address</a>."
+msgstr "<strong>Примечание:</strong> вы всё ещё можете <a href=\"%(email_url)s\">изменить ваш email адрес</a>."
+
+#: .\templates\default.html:17
+msgid "Bulletin Board"
+msgstr "Доска объявлений"
+
+#: .\templates\default.html:20 .\templates\default.html:22
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\templates\delete.html:5 .\templates\delete.html:12
+#: .\templates\post.html:60
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\templates\delete.html:11
+msgid "Do you really want to delete"
+msgstr "Вы действительно хотите удалить"
+
+#: .\templates\edit.html:9 .\templates\post.html:57
+msgid "Edit"
+msgstr "Редактировать"
+
+#: .\templates\edit.html:16 .\templates\profile_edit.html:16
+msgid "Save"
+msgstr "Сохранить"
+
+#: .\templates\main_page.html:6
+msgid "Welcome to the site! Please select your language and time zone"
+msgstr "Добро пожаловать на сайт! Пожалуйста, выберите ваш язык и часовой пояс"
+
+#: .\templates\main_page.html:14
+msgid "Language"
+msgstr "Язык"
+
+#: .\templates\main_page.html:25 .\templates\main_page.html:36
+msgid "Set"
+msgstr "Установить"
+
+#: .\templates\main_page.html:30
+msgid "Time zone"
+msgstr "Часовой пояс"
+
+#: .\templates\main_page.html:39
+msgid "Posts"
+msgstr "Объявления"
+
+#: .\templates\post.html:12 .\templates\posts.html:21
+#: .\templates\responses.html:21
+msgid "Publication date"
+msgstr "Дата публикации"
+
+#: .\templates\post.html:20
+msgid "Subscribe"
+msgstr "Подписаться"
+
+#: .\templates\post.html:26 .\templates\post.html:39
+#: .\templates\responses.html:20
+msgid "Author"
+msgstr "Автор"
+
+#: .\templates\post.html:35
+msgid "All responses"
+msgstr "Все отклики"
+
+#: .\templates\post.html:37
+msgid "My responses"
+msgstr "Мои отклики"
+
+#: .\templates\post.html:40 .\templates\weekly_postsletter.html:13
+msgid "Date"
+msgstr "Дата"
+
+#: .\templates\post.html:41 .\templates\responses.html:22
+msgid "Status"
+msgstr "Статус"
+
+#: .\templates\post.html:42 .\templates\responses.html:23
+msgid "Actions"
+msgstr "Действия"
+
+#: .\templates\post.html:67 .\templates\responses.html:37
+msgid "Accept"
+msgstr "Принять"
+
+#: .\templates\post.html:73 .\templates\responses.html:43
+msgid "Reject"
+msgstr "Отклонить"
+
+#: .\templates\post.html:89
+msgid "Edit post"
+msgstr "Редактировать объявление"
+
+#: .\templates\post.html:92
+msgid "Delete post"
+msgstr "Удалить объявление"
+
+#: .\templates\post.html:97
+msgid "Back to list"
+msgstr "Назад к списку"
+
+#: .\templates\post.html:103
+msgid "Create response"
+msgstr "Создать отклик"
+
+#: .\templates\post_created.html:5
+msgid "New post"
+msgstr "Новое объявление"
+
+#: .\templates\post_created.html:8
+msgid "Hello"
+msgstr "Здравствуйте"
+
+#: .\templates\post_created.html:12 .\templates\weekly_postsletter.html:15
+msgid "Read full"
+msgstr "Читать полностью"
+
+#: .\templates\posts.html:14 .\templates\responses.html:13
+msgid "Find"
+msgstr "Найти"
+
+#: .\templates\posts.html:16
+msgid "Number of posts"
+msgstr "Количество объявлений"
+
+#: .\templates\posts.html:37
+msgid "No posts!"
+msgstr "Нет объявлений!"
+
+#: .\templates\posts.html:61
+msgid "Make post"
+msgstr "Создать объявление"
+
+#: .\templates\profile.html:6
+msgid "Your Profile"
+msgstr "Ваш профиль"
+
+#: .\templates\profile.html:13
+msgid "No avatar"
+msgstr "Нет аватара"
+
+#: .\templates\profile.html:18
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: .\templates\profile.html:21
+msgid "Email"
+msgstr "Email"
+
+#: .\templates\profile.html:27
+msgid "Statistics"
+msgstr "Статистика"
+
+#: .\templates\profile.html:28
+msgid "Posts created"
+msgstr "Создано объявлений"
+
+#: .\templates\profile.html:29
+msgid "Responses made"
+msgstr "Сделано откликов"
+
+#: .\templates\profile.html:30
+msgid "Categories subscribed"
+msgstr "Подписан на категорий"
+
+#: .\templates\profile.html:34
+msgid "No categories"
+msgstr "Нет категорий"
+
+#: .\templates\profile.html:39
+msgid "Your groups:"
+msgstr "Ваши группы:"
+
+#: .\templates\profile.html:43
+msgid "No groups"
+msgstr "Нет групп"
+
+#: .\templates\profile.html:47 .\templates\responses.html:7
+msgid "Responses to my posts"
+msgstr "Отклики на мои объявления"
+
+#: .\templates\profile.html:49 .\templates\profile_edit.html:9
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+#: .\templates\profile.html:50
+msgid "Email settings"
+msgstr "Настройки email"
+
+#: .\templates\profile.html:51
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: .\templates\profile.html:52
+msgid "Connections"
+msgstr "Подключения"
+
+#: .\templates\profile.html:53
+msgid "Logout account"
+msgstr "Выйти из аккаунта"
+
+#: .\templates\responses.html:15
+msgid "Number of responses"
+msgstr "Количество откликов"
+
+#: .\templates\responses.html:52
+msgid "No responses!"
+msgstr "Нет откликов!"
+
+#: .\templates\socialaccount\connections.html:6
+msgid "Account Connections"
+msgstr "Подключения аккаунта"
+
+#: .\templates\socialaccount\connections.html:12
+msgid ""
+"You can sign in to your account using any of the following third-party "
+"accounts:"
+msgstr "Вы можете войти в свой аккаунт, используя любую из следующих сторонних учетных записей:"
+
+#: .\templates\socialaccount\connections.html:45
+msgid "You currently have no third-party accounts connected to this account."
+msgstr "В настоящее время у вас нет сторонних аккаунтов, подключенных к этому аккаунту."
+
+#: .\templates\socialaccount\connections.html:49
+msgid "Add a Third-Party Account"
+msgstr "Добавить сторонний аккаунт"
+
+#: .\templates\socialaccount\login.html:7
+#, python-format
+msgid "Connect %(provider)s"
+msgstr "Подключить %(provider)s"
+
+#: .\templates\socialaccount\login.html:11
+#, python-format
+msgid "Sign In Via %(provider)s"
+msgstr "Войти через %(provider)s"
+
+#: .\templates\socialaccount\login.html:18
+#, python-format
+msgid "You are about to connect a new third-party account from %(provider)s."
+msgstr "Вы собираетесь подключить новый сторонний аккаунт от %(provider)s."
+
+#: .\templates\socialaccount\login.html:22
+#, python-format
+msgid "You are about to sign in using a third-party account from %(provider)s."
+msgstr "Вы собираетесь войти, используя сторонний аккаунт от %(provider)s."
+
+#: .\templates\socialaccount\login.html:29
+msgid "Continue"
+msgstr "Продолжить"
+
+#: .\templates\socialaccount\signup.html:11
+#, python-format
+msgid ""
+"You are about to use your %(provider_name)s account to login to\n"
+"%(site_name)s. As a final step, please complete the following form:"
+msgstr ""
+"Вы собираетесь использовать свой аккаунт %(provider_name)s для входа на\n"
+"%(site_name)s. В качестве последнего шага, пожалуйста, заполните следующую форму:"
+
+#: .\templates\weekly_postsletter.html:4
+msgid "Weekly articles selection"
+msgstr "Еженедельная подборка статей"
+
+#: .\templates\weekly_postsletter.html:8
+msgid "Here are the new posts in category"
+msgstr "Вот новые объявления в категории"
+
+#: .\templates\weekly_postsletter.html:8
+msgid "from the past week (from"
+msgstr "за прошедшую неделю (с"

@@ -1,0 +1,18 @@
+{% extends 'default.html' %}
+{% load i18n %}
+
+{% block extra_head %}
+    {{ form.media }}
+{% endblock %}
+
+{% block title %}
+    <h1>{% trans "Edit Profile" %}</h1>
+{% endblock title %}
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+</form>
+{% endblock content %}

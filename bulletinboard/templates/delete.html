@@ -1,0 +1,14 @@
+{% extends 'default.html' %}
+{% load i18n %}
+
+{% block title %}
+    <h1>{% trans "Delete" %} {{ type }} </h1>
+{% endblock title %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>{% trans "Do you really want to delete" %} {{type}}?</p>
+    <button class="btn btn-primary">{% trans 'Delete' %} </button>
+</form>
+{% endblock content %}

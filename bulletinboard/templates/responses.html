@@ -1,0 +1,73 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+{% load i18n %}
+
+{% block title %}
+   <h1>{% trans "Responses to my posts" %}</h1>
+{% endblock title %}
+
+{% block content %}
+   <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="{% trans 'Find' %}" />
+   </form>
+   <h5>{% trans "Number of responses" %} - {{ responses|length }}</h5>
+   {% if responses %}
+       <table style="width: 110%; text-align: center;">
+           <tr>
+               <td>{% trans "Text" %}</td>
+               <td>{% trans "Author" %}</td>
+               <td>{% trans "Publication date" %}</td>
+               <td>{% trans "Status" %}</td>
+               <td>{% trans "Actions" %}</td>
+           </tr>
+
+           {% for response in responses %}
+           <tr>
+               <td>{{ response.text }}</td>
+               <td>{{ response.user }}</td>
+               <td>{{ response.creation_date|date:'d.M.Y' }}</td>
+               <td>{{ response.status }}</td>
+               <td>
+                   {% if response.post.author.user == user or user|admin %}
+                       {% if response.status != 'accepted' %}
+                           <form action="{% url 'response_accept' response.post.pk response.pk %}" method="post" style="display:inline;">
+                               {% csrf_token %}
+                               <button class="btn btn-sm btn-success">{% trans "Accept" %}</button>
+                           </form>
+                       {% endif %}
+                       {% if response.status != 'rejected' %}
+                           <form action="{% url 'response_reject' response.post.pk response.pk %}" method="post" style="display:inline;">
+                               {% csrf_token %}
+                               <button class="btn btn-sm btn-warning">{% trans "Reject" %}</button>
+                           </form>
+                       {% endif %}
+                   {% endif %}
+               </td>
+           </tr>
+           {% endfor %}
+       </table>
+   {% else %}
+       <h2>{% trans "No responses!" %}</h2>
+   {% endif %}
+
+   {% if page_obj.has_previous %}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {{ page_obj.number }}
+
+    {% if page_obj.has_next %}
+        <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+        {% if paginator.num_pages != page_obj.next_page_number %}
+            ...
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+    {% endif %}
+
+{% endblock content %}

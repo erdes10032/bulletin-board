@@ -1,0 +1,41 @@
+{% extends 'default.html' %}
+{% load i18n %}
+{% load tz %}
+
+{% block title %}
+   <h2>{% trans "Welcome to the site! Please select your language and time zone" %}</h2>
+{% endblock title %}
+
+{% block content %}
+
+    <form action="{% url 'set_language' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ redirect_to }}">
+        <label for="language">{% trans "Language" %}:</label>
+        <select name="language" id="">
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% get_current_language as LANGUAGE_CODE %}
+            {% for language in languages %}
+            <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                {{ language.name_local }} - {{ language.code }}
+            </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="{% trans 'Set' %}">
+    </form>
+    {% get_current_timezone as TIME_ZONE %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="timezone">{% trans "Time zone" %}:</label>
+        <select name="timezone">
+            {% for tz in timezones %}
+            <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>{{ tz }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="{% trans 'Set' %}">
+    </form>
+    <form action="{% url 'post_list' %}">
+        <button class="btn btn-primary"> {% trans "Posts" %} </button>
+    </form>
+{% endblock %}

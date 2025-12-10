@@ -1,0 +1,67 @@
+{% extends "default.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        {% block head_title %}
+                            {% translate "Email Verification" %}
+                        {% endblock head_title %}
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        {% blocktranslate %}
+                            We've sent a verification code to:
+                        {% endblocktranslate %}
+                    </p>
+                    <p class="h5 text-center my-4">
+                        {% block recipient %}
+                            <a href="mailto:{{ email }}">{{ email }}</a>
+                        {% endblock recipient %}
+                    </p>
+                    
+                    <form method="post" action="{% block action_url %}{% endblock action_url %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="code" class="form-label">
+                                {% translate "Enter verification code" %}
+                            </label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="code" 
+                                   name="code" 
+                                   required 
+                                   placeholder="{% translate '6-digit code' %}">
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                {% translate "Verify" %}
+                            </button>
+                            
+                            {% if change_url %}
+                            <a href="{% block change_url %}{% endblock change_url %}" 
+                               class="btn btn-outline-secondary">
+                                {% block change_title %}
+                                    {% translate "Use a different email address" %}
+                                {% endblock change_title %}
+                            </a>
+                            {% endif %}
+                        </div>
+                    </form>
+                    
+                    {% if extra_tags %}
+                        <!-- Hidden field for extra tags if needed -->
+                        <input type="hidden" name="tags" value="{% block extra_tags %}{% endblock extra_tags %}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

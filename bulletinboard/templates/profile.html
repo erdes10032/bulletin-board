@@ -1,0 +1,53 @@
+{% extends 'default.html' %}
+{% load i18n %}
+
+{% block content %}
+<div>
+    <h2>{% trans "Your Profile" %}</h2>
+
+    <div>
+        <div>
+            {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" alt="{% trans 'Avatar' %}" width="150">
+            {% else %}
+                <div>{% trans "No avatar" %}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <p><strong>{% trans "Username" %}:</strong> {{ user.username }}</p>
+            <p><strong>{% trans "First Name" %}:</strong> {{ user.first_name }}</p>
+            <p><strong>{% trans "Last Name" %}:</strong> {{ user.last_name }}</p>
+            <p><strong>{% trans "Email" %}:</strong> {{ user.email }}</p>
+            <p><strong>{% trans "Gender" %}:</strong> {{ profile.get_gender_display }}</p>
+        </div>
+    </div>
+
+    <div>
+        <h3>{% trans "Statistics" %}</h3>
+        <p>{% trans "Posts created" %}: {{ user_posts.count }}</p>
+        <p>{% trans "Responses made" %}: {{ user_responses.count }}</p>
+        <p>{% trans "Categories subscribed" %}:
+            {% for category in user_subscriptions %}
+                {{ category.get_name_display }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                {% trans "No categories" %}
+            {% endfor %}
+        </p>
+    </div>
+    <a>
+        {% trans "Your groups:" %}
+        {% for group in request.user.groups.all %}
+            {{ group.name }}{% if not forloop.last %}, {% endif %}
+            {% empty %}
+            {% trans "No groups" %}
+        {% endfor %}
+    </a>
+    <br>
+    <a href="{% url 'my_responses' %}" class="btn btn-primary">{% trans "Responses to my posts" %}</a>
+    <br>
+    <a href="{% url 'profile_edit' %}" class="btn btn-primary">{% trans "Edit Profile" %}</a>
+    <a href='/accounts/password/change' class="btn btn-primary">{% trans "Change password" %}</a>
+    <a href='/accounts/logout' class="btn btn-primary">{% trans "Logout account" %}</a>
+</div>
+{% endblock %}

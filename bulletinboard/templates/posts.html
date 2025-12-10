@@ -1,0 +1,64 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+{% load i18n %}
+
+
+{% block title %}
+   <h1>{{ post_type }}</h1>
+{% endblock title %}
+
+{% block content %}
+   <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="{% trans 'Find' %}" />
+   </form>
+   <h5>{% trans "Number of posts" %} - {{ posts|length }}</h5>
+   {% if posts %}
+       <table style="width: 110%; text-align: center;">
+           <tr>
+               <td>{% trans "Title" %}</td>
+               <td>{% trans "Publication date" %}</td>
+               <td>{% trans "Text" %}</td>
+           </tr>
+
+           {% for post in posts %}
+           <tr>
+               <td>
+                   <a href="{{ post.get_absolute_url_with_domain }}">{{ post.title }}</a>
+               </td>
+               <td>{{ post.creation_date|date:'d.M.Y' }}</td>
+               <td>{{ post.text|striptags_filter|truncatechars:20}}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>{% trans "No posts!" %}</h2>
+   {% endif %}
+
+   {% if page_obj.has_previous %}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {{ page_obj.number }}
+
+    {% if page_obj.has_next %}
+        <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+        {% if paginator.num_pages != page_obj.next_page_number %}
+            ...
+            <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+    {% endif %}
+    {% if request.user.is_authenticated and user|author or user|admin %}
+        <br>
+        <form action="{% url 'post_create' %}">
+            <button class="btn btn-primary">{% trans "Make post" %}</button>
+        </form>
+    {% endif %}
+
+{% endblock content %}

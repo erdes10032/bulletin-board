@@ -1,0 +1,13 @@
+{% extends 'default.html' %}
+{% load i18n %}
+{% load allauth %}
+{% block title %}
+    {% element h1 %}
+        {% trans "Sign Up Closed" %}
+    {% endelement %}
+{% endblock title %}
+{% block content %}
+    {% element p %}
+        {% trans "We are sorry, but the sign up is currently closed." %}
+    {% endelement %}
+{% endblock content %}

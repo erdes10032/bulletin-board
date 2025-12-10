@@ -1,0 +1,15 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    <h1>{% block head_title %}{% endblock head_title %}</h1>
+{% endblock title %}
+{% block content %}
+    <body>
+        {% block body %}
+        {% block content %}
+        {% endblock content %}
+        {% endblock body %}
+        {% block extra_body %}
+        {% endblock extra_body %}
+    </body>
+{% endblock content %}

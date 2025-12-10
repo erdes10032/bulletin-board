@@ -1,0 +1,63 @@
+{% extends 'default.html' %}
+{% load i18n %}
+{% load allauth %}
+
+{% block title %}
+    <div>　<h4 class="mb-0">{% trans "Enter Verification Code" %}</h4>　</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div>
+
+                <div>
+                    {% if email %}
+                        <div>
+                            <p >{% trans "We've sent a verification code to:" %}</p>
+                            <p>　<strong>{{ email }}</strong>　</p>
+                            <small>{% trans "Please check your inbox and enter the code below." %}</small>
+                        </div>
+                    {% elif request.session.account_verified_email %}
+                        <div>
+                            <p>{% trans "We've sent a verification code to:" %}</p>
+                            <p>　<strong>{{ request.session.account_verified_email.0 }}</strong>　</p>
+                            <small>{% trans "Please check your inbox and enter the code below." %}</small>
+                        </div>
+                    {% else %}
+                        <div>
+                            <p>{% trans "No email address found for verification." %}</p>
+                            <a href="{% url 'account_login' %}">
+                                {% trans "Return to Login" %}
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    {% if email or request.session.account_verified_email %}
+                        <form method="post" action="{% url 'account_confirm_login_code' %}">
+                            {% csrf_token %}
+                            <div>
+                                <label for="id_code" class="form-label">{% trans "Verification Code" %}</label>
+                                <input type="text" name="code" id="id_code" class="form-control"
+                                       placeholder="{% trans 'Enter 6-digit code' %}" required autofocus>
+                                {% if form.code.errors %}
+                                    <div>
+                                        {{ form.code.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div>
+                                <button type="submit" class="btn btn-primary">
+                                    {% trans "Verify Code" %}
+                                </button>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

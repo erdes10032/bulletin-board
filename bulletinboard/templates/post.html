@@ -1,0 +1,111 @@
+{% extends 'default.html' %}
+{% load custom_filters %}
+{% load i18n %}
+
+{% block title %}
+    <h1>{{ post.title }}</h1>
+{% endblock title %}
+
+{% block content %}
+    <table style="width: 100%; text-align: center;">
+        <tr>
+            <td>{% trans "Publication date" %} - {{ post.creation_date|date:'d.M.Y' }}</td>
+        </tr>
+        <tr>
+            <td>
+                {% trans "Category" %} - {{ post.category }}
+                {% if user.is_authenticated %}
+                    {% if not is_subscribed %}
+                        <form method="post" action="{% url 'subscribe_category' post.category.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">{% trans "Subscribe" %}</button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>{% trans "Author" %} - {{ post.author.user.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ post.text|safe }}</td>
+        </tr>
+        {% if user.is_authenticated and user_responses_to_post %}
+            <tr>
+                <td>
+                    {% if post.author.user == user %}
+                        <h3>{% trans "All responses" %}:</h3>
+                    {% else %}
+                        <h3>{% trans "My responses" %}:</h3>
+                    {% endif %}
+                    <table style="width: 100%; margin-top: 20px;" class="table">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Text" %}</th>
+                                <th>{% trans "Author" %}</th>
+                                <th>{% trans "Date" %}</th>
+                                <th>{% trans "Status" %}</th>
+                                <th>{% trans "Actions" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for response in user_responses_to_post %}
+                            <tr>
+                                <td>{{ response.text }}</td>
+                                <td>{{ response.user }}</td>
+                                <td>{{ response.creation_date|date:'d.M.Y H:i' }}</td>
+                                <td>
+                                    <span> {{ response.get_status_display }} </span>
+                                </td>
+                                <td>
+                                    {% if response.user == user or user|admin %}
+                                        <a href="{% url 'response_update' post.pk response.pk %}" class="btn btn-sm btn-primary">
+                                            {% trans "Edit" %}
+                                        </a>
+                                        <a href="{% url 'response_delete' post.pk response.pk %}" class="btn btn-sm btn-danger">
+                                            {% trans "Delete" %}
+                                        </a>
+                                    {% endif %}
+                                    {% if post.author.user == user or user|admin %}
+                                        {% if response.status != 'accepted' %}
+                                            <form action="{% url 'response_accept' post.pk response.pk %}">
+                                                {% csrf_token %}
+                                                <button class="btn btn-sm btn-success">{% trans "Accept" %}</button>
+                                            </form>
+                                        {% endif %}
+                                        {% if response.status != 'rejected' %}
+                                            <form action="{% url 'response_reject' post.pk response.pk %}">
+                                                {% csrf_token %}
+                                                <button class="btn btn-sm btn-warning">{% trans "Reject" %}</button>
+                                            </form>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            <tr>
+        {% endif %}
+            <td>
+                {% if request.user.is_authenticated and user|author and post.author.user == user or user|admin %}
+                    <br>
+                    <form action="{{ post.get_absolute_url_with_domain }}/edit" style="display:inline;">
+                        <button class="btn btn-primary"> {% trans "Edit post" %} </button>
+                    </form>
+                    <form action="{{ post.get_absolute_url_with_domain }}/delete" style="display:inline;">
+                        <button class="btn btn-primary"> {% trans "Delete post" %} </button>
+                    </form>
+                {% endif %}
+                <br>
+                <form action="{% url 'post_list' %}">
+                    <button class="btn btn-primary"> {% trans "Back to list" %} </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form action="{% url 'response_create' post.pk %}">
+        <button class="btn btn-primary"> {% trans "Create response" %} </button>
+    </form>
+{% endblock content %}
