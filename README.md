@@ -103,14 +103,12 @@ cd bulletinboard
 ### Настроить переменные окружения
 
 ```bash
-# Linux
-echo "DEBUG=True" > /bulletinboard/.env
+# Linux/macOS
 echo "EMAIL_HOST_USER=your_email@yandex.ru" > /bulletinboard/.env
 echo "EMAIL_HOST_PASSWORD=your_app_password" > /bulletinboard/.env
 echo "EMAIL_ADMIN=admin_email@example.com" > /bulletinboard/.env
 
 #Windows
-echo DEBUG=True > bulletinboard\.env
 echo EMAIL_HOST_USER=your_email@yandex.ru >> bulletinboard\.env
 echo EMAIL_HOST_PASSWORD=your_app_password >> bulletinboard\.env
 echo EMAIL_ADMIN=admin_email@example.com >> bulletinboard\.env
