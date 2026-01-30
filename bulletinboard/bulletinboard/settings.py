@@ -24,7 +24,8 @@ LOCALE_PATHS = [
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^k6(4_=24v&7io7y=ajtphv@!ta&hcrni1orzu(6(s#p(fh5dx'
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -241,10 +242,10 @@ ADMINS = [
     ('admin', os.getenv('EMAIL_ADMIN')),
 ]
 
-REDIS_HOST = 'redis-16730.c232.us-east-1-2.ec2.cloud.redislabs.com'
-REDIS_PORT = 16730
-REDIS_PASSWORD = 'XPI8Ftqb4Nl0kpRxyvXvjgwEE0zQvOvv'
-REDIS_USERNAME = 'default'
+REDIS_HOST = os.getenv('REDIS_HOST')
+REDIS_PORT = os.getenv('REDIS_PORT')
+REDIS_USERNAME = os.getenv('REDIS_USERNAME')
+REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
 
 CELERY_BROKER_URL = f'redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0'
 CELERY_RESULT_BACKEND = f'redis://{REDIS_USERNAME}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/0'

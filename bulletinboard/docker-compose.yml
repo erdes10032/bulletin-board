@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: bulletinboard_django
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./media:/app/media
+      - ./staticfiles:/app/staticfiles
+      - ./cache_files:/app/cache_files
+      - ./db.sqlite3:/app/db.sqlite3
+    env_file:
+      - ./bulletinboard/.env
+    environment:
+      - DJANGO_SETTINGS_MODULE=bulletinboard.settings
+      - PYTHONUNBUFFERED=1
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+    networks:
+      - bulletinboard_network
+
+  redis:
+    image: redis:8.4-alpine
+    container_name: bulletinboard_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - bulletinboard_network
+
+  celery:
+    build: .
+    container_name: bulletinboard_celery
+    restart: unless-stopped
+    command: celery -A bulletinboard worker --loglevel=info
+    volumes:
+      - ./media:/app/media
+      - ./db.sqlite3:/app/db.sqlite3
+    env_file:
+      - ./bulletinboard/.env
+    environment:
+      - DJANGO_SETTINGS_MODULE=bulletinboard.settings
+      - PYTHONUNBUFFERED=1
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - web
+      - redis
+    networks:
+      - bulletinboard_network
+
+  # Celery beat для периодических задач
+  celery-beat:
+    build: .
+    container_name: bulletinboard_celery_beat
+    restart: unless-stopped
+    command: celery -A bulletinboard beat --loglevel=info
+    volumes:
+      - ./db.sqlite3:/app/db.sqlite3
+    env_file:
+      - ./bulletinboard/.env
+    environment:
+      - DJANGO_SETTINGS_MODULE=bulletinboard.settings
+      - PYTHONUNBUFFERED=1
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - web
+      - redis
+    networks:
+      - bulletinboard_network
+
+networks:
+  bulletinboard_network:
+    driver: bridge
