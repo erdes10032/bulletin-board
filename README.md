@@ -82,7 +82,7 @@ Django веб-приложение для управления объявлен�
 
 ```bash
 git clone https://github.com/erdes10032/bulletin-board.git
-cd bulletinboard/bulletin-board
+cd bulletin-board/bulletinboard
 ```
 
 **2. Создать виртуальное окружение**
@@ -98,7 +98,6 @@ venv\Scripts\activate  # Windows
 
 ```bash
 pip install -r requirements.txt
-cd bulletinboard
 ```
 
 **2. Заполнить файл .env своими данными**
@@ -133,7 +132,7 @@ celery -A bulletinboard beat -l INFO
 
 ```bash
 git clone https://github.com/erdes10032/bulletin-board.git
-cd bulletinboard/bulletin-board
+cd bulletin-board/bulletinboard
 ```
 
 **2. Заполнить файл .env своими данными**
