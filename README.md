@@ -67,6 +67,7 @@ Django веб-приложение для управления объявлен�
 - **Authentication**: Django Allauth
 - **Internationalization**: Django i18n
 - **Caching**: Django cache framework
+- **Isolated Environment**: Docker
 
 ## Основные URL (локальная разработка)
 - **Главная страница**: `http://127.0.0.1:8000/`
@@ -77,14 +78,14 @@ Django веб-приложение для управления объявлен�
 
 ## Установка
 
-### Клонировать репозиторий
+**1. Клонировать репозиторий**
 
 ```bash
 git clone https://github.com/erdes10032/bulletin-board.git
-cd bulletin-board
+cd bulletinboard/bulletin-board
 ```
 
-### Создать виртуальное окружение
+**2. Создать виртуальное окружение**
 
 ```bash
 python -m venv venv
@@ -93,41 +94,29 @@ source venv/bin/activate  # Linux
 venv\Scripts\activate  # Windows
 ```
 
-### Установить зависимости
+**3. Установить зависимости**
 
 ```bash
 pip install -r requirements.txt
 cd bulletinboard
 ```
 
-### Настроить переменные окружения
+**2. Заполнить файл .env своими данными**
 
-```bash
-# Linux/macOS
-echo "EMAIL_HOST_USER=your_email@yandex.ru" > /bulletinboard/.env
-echo "EMAIL_HOST_PASSWORD=your_app_password" > /bulletinboard/.env
-echo "EMAIL_ADMIN=admin_email@example.com" > /bulletinboard/.env
-
-#Windows
-echo EMAIL_HOST_USER=your_email@yandex.ru >> bulletinboard\.env
-echo EMAIL_HOST_PASSWORD=your_app_password >> bulletinboard\.env
-echo EMAIL_ADMIN=admin_email@example.com >> bulletinboard\.env
-```
-
-### Выполнить миграции
+**5. Выполнить миграции**
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### Создать суперпользователя
+**6. Создать суперпользователя**
 
 ```bash
 python manage.py createsuperuser
 ```
 
-### Запустить сервер
+**7. Запустить сервер**
 
 ```bash
 # Запуск Django сервера
@@ -136,6 +125,36 @@ python manage.py runserver
 celery -A bulletinboard worker -l INFO
 # И Celery beat для периодических задач
 celery -A bulletinboard beat -l INFO
+```
+
+### Способ 2: Docker-установка
+
+**1. Клонировать репозиторий**
+
+```bash
+git clone https://github.com/erdes10032/bulletin-board.git
+cd bulletinboard/bulletin-board
+```
+
+**2. Заполнить файл .env своими данными**
+
+**3. Запустить проект**
+
+```bash
+docker-compose up --build
+```
+Проект будет доступен по адресу: http://localhost:8000
+
+**4. Остановить проект (опционально)**
+
+```bash
+docker-compose down
+```
+
+**5. Остановить проект с удалением данных (опционально)**
+
+```bash
+docker-compose down -v
 ```
 
 ## Использование
