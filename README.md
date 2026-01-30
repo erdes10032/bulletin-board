@@ -150,10 +150,10 @@ docker-compose up --build
 docker-compose down
 ```
 
-**5. Остановить проект с удалением данных (опционально)**
+**5. Остановить проект с удалением всех данных (опционально)**
 
 ```bash
-docker-compose down -v
+docker-compose down -v --rmi all
 ```
 
 ## Использование
