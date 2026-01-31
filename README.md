@@ -102,7 +102,7 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-**2. Заполнить файл .env своими данными**
+**2. Заполнить файл bulletinboard/.env своими данными**
 
 **5. Выполнить миграции**
 
@@ -137,7 +137,7 @@ git clone https://github.com/erdes10032/bulletin-board.git
 cd bulletin-board/bulletinboard
 ```
 
-**2. Заполнить файл .env своими данными**
+**2. Заполнить файл bulletinboard/.env своими данными**
 
 **3. Запустить проект**
 
