@@ -287,6 +287,9 @@ curl -X POST "http://localhost:8000/api/post/" \
 ## Тестирование
 
 ```bash
+# Если приложение запущено в докере, то нужно войти в контейнер
+docker-compose exec web bash
+
 # Тесты основных частей
 python manage.py test board.tests.test_basic
 
