@@ -289,15 +289,18 @@ curl -X POST "http://localhost:8000/api/post/" \
 ```bash
 # Если приложение запущено в докере, то нужно войти в контейнер
 docker-compose exec web bash
+```
 
-# Тесты основных частей
-python manage.py test board.tests.test_basic
+### Запуск всех тестов
 
-# Тесты основных сценариев использования
-python manage.py test board.tests.test_critical_paths
+```bash
+pytest
+```
 
-# Тесты валидации форм
-python manage.py test board.tests.test_forms   
+### Запуск конкретного теста
+
+```bash
+pytest -m test-name -v
 ```
 
 ## Логирование

@@ -1,115 +1,94 @@
-from django.test import TestCase
+import pytest
 from django.urls import reverse
-from django.contrib.auth.models import User, Permission, Group
-from board.models import Profile, Category, Post, Response
+from board.models import Post, Response
+from pytest_django.asserts import assertRedirects
 
-class CriticalPathsTests(TestCase):
+
+@pytest.mark.critical
+@pytest.mark.integration
+class TestCriticalPaths:
     """Тесты основных сценариев использования"""
-
-    def setUp(self):
-        # Создаем тестового пользователя с правами автора
-        self.user = User.objects.create_user(
-            username='testauthor',
-            password='testpass123'
-        )
-        Profile.objects.create(user=self.user, gender='male')
-
-        # Даем права на создание постов и откликов
-        add_post_perm = Permission.objects.get(codename='add_post')
-        add_response_perm = Permission.objects.get(codename='add_response')
-        self.user.user_permissions.add(add_post_perm, add_response_perm)
-
-        # Добавляем в группу авторов
-        authors_group, created = Group.objects.get_or_create(name='authors')
-        if created:
-            # Даем группе необходимые права
-            authors_group.permissions.add(
-                Permission.objects.get(codename='add_post'),
-                Permission.objects.get(codename='change_post'),
-                Permission.objects.get(codename='delete_post'),
-                Permission.objects.get(codename='add_response'),
-                Permission.objects.get(codename='change_response'),
-                Permission.objects.get(codename='delete_response'),
-            )
-        self.user.groups.add(authors_group)
-
-        self.category = Category.objects.create(name='heal')
-
-    def test_post_creation_workflow(self):
+    def test_post_creation_workflow(self, authenticated_client, test_category, author_user):
         """Весь процесс создания поста работает"""
-        # 1. Логин
-        self.client.login(username='testauthor', password='testpass123')
+        # 1. Переход на форму создания
+        response = authenticated_client.get(reverse('post_create'))
+        assert response.status_code == 200
 
-        # 2. Переход на форму создания
-        response = self.client.get(reverse('post_create'))
-        self.assertEqual(response.status_code, 200)
-
-        # 3. Создание поста
+        # 2. Создание поста
         post_data = {
-            'category': self.category.id,
+            'category': test_category.id,
             'title': 'Test Workflow Post',
-            'text': 'Testing the complete workflow of post creation'
+            'text': 'Testing the complete workflow of post creation with enough length'
         }
+        response = authenticated_client.post(reverse('post_create'), post_data)
 
-        response = self.client.post(reverse('post_create'), post_data)
-
-        # 4. Проверка редиректа
-        self.assertEqual(response.status_code, 302)
-
-        # 5. Проверка создания в БД
+        # 3. Проверка редиректа - теперь на детальную страницу, а не на список
         post = Post.objects.filter(title='Test Workflow Post').first()
-        self.assertIsNotNone(post)
-        print(f"✓ Пост создан: {post.title}")
+        assert post is not None
+        assertRedirects(response, reverse('post_detail', args=[post.id]))
 
-    def test_response_workflow(self):
+        # 4. Проверка создания в БД
+        assert post.author.user == author_user
+        print(f"Пост создан: {post.title}")
+
+    def test_response_workflow(self, client, test_post, regular_user):
         """Весь процесс создания отклика работает"""
-        # Создаем автора и пост
-        author = User.objects.create_user(username='postauthor', password='pass')
-        author_profile = Profile.objects.create(user=author, gender='female')
+        # Логинимся как обычный пользователь
+        client.force_login(regular_user)
 
-        # Даем автору права на создание постов
-        add_post_perm = Permission.objects.get(codename='add_post')
-        author.user_permissions.add(add_post_perm)
-
-        post = Post.objects.create(
-            author=author_profile,
-            category=self.category,
-            title='Post for Responses',
-            text='Content for testing responses'
-        )
-
-        # Логинимся как обычный пользователь с правами на отклики
-        responder = User.objects.create_user(username='responder', password='pass')
-        responder_profile = Profile.objects.create(user=responder, gender='male')
-
-        # Даем права на создание откликов
+        # Проверяем, есть ли у пользователя права на создание отклика
+        from django.contrib.auth.models import Permission
         add_response_perm = Permission.objects.get(codename='add_response')
-        responder.user_permissions.add(add_response_perm)
-
-        self.client.login(username='responder', password='pass')
+        if not regular_user.has_perm('board.add_response'):
+            # Если нет прав, добавим их для теста
+            regular_user.user_permissions.add(add_response_perm)
 
         # Проверяем доступ к форме создания отклика
-        response_get = self.client.get(
-            reverse('response_create', args=[post.id])
-        )
-        self.assertEqual(response_get.status_code, 200)
+        response_get = client.get(reverse('response_create', args=[test_post.id]))
+        assert response_get.status_code == 200
 
         # Создаем отклик
-        response_post = self.client.post(
-            reverse('response_create', args=[post.id]),
-            {'text': 'Test response'}
+        response_post = client.post(
+            reverse('response_create', args=[test_post.id]),
+            {'text': 'Test response with valid length'}
         )
 
         # Должен быть редирект на страницу поста
-        self.assertEqual(response_post.status_code, 302)
-        self.assertTrue(response_post.url.startswith('/posts/'))
+        assertRedirects(response_post, reverse('post_detail', args=[test_post.id]))
 
         # Проверяем создание в БД
         created_response = Response.objects.filter(
-            post=post,
-            user=responder,
-            text='Test response'
+            post=test_post,
+            user=regular_user,
+            text='Test response with valid length'
         ).first()
 
-        self.assertIsNotNone(created_response)
-        print(f"✓ Отклик создан пользователем: {responder.username}")
+        assert created_response is not None
+        assert created_response.status == 'in anticipation'
+        print(f"Отклик создан пользователем: {regular_user.username}")
+
+    def test_accept_response_workflow(self, client, test_post, author_user, regular_user):
+        """Тест принятия отклика автором"""
+        # Создаем отклик
+        response = Response.objects.create(
+            post=test_post,
+            user=regular_user,
+            text='Test response',
+            status='in anticipation'
+        )
+
+        # Логинимся как автор
+        client.force_login(author_user)
+
+        # Принимаем отклик
+        response_post = client.post(
+            reverse('response_accept', args=[test_post.id, response.id])
+        )
+
+        # Проверяем редирект
+        assert response_post.status_code == 302
+
+        # Проверяем изменение статуса
+        response.refresh_from_db()
+        assert response.status == 'accepted'
+        print(f"Отклик принят автором")
