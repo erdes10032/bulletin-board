@@ -102,7 +102,7 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-**2. Заполнить файл bulletinboard/.env своими данными**
+**4. Заполнить файл bulletinboard/.env своими данными**
 
 **5. Выполнить миграции**
 
