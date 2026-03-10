@@ -48,7 +48,7 @@ def send_bulk_post_notifications(notifications_data):
 @shared_task
 def send_weekly_posts():
     week_ago = datetime.now() - timedelta(days=7)
-    categories = Category.objects.all()
+    categories = Category.objects.prefetch_related('subscribers')
 
     for category in categories:
         recent_posts = Post.objects.filter(

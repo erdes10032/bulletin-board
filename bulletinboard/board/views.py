@@ -1,4 +1,5 @@
 import os
+from django.db import transaction
 from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
 from django.shortcuts import redirect, get_object_or_404
@@ -57,7 +58,7 @@ class PostList(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = Post.objects.all()
+        queryset = Post.objects.select_related('author', 'category')
         self.filterset = PostFilter(self.request.GET, queryset)
         return self.filterset.qs
 
@@ -71,7 +72,7 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'post'
-    queryset = Post.objects.all()
+    queryset = Post.objects.select_related('author', 'category')
 
     def get_object(self, *args, **kwargs):
         obj = cache.get(f'posts-{self.kwargs["pk"]}', None)
@@ -91,11 +92,11 @@ class PostDetail(DetailView):
                 user_responses_to_this_post = Response.objects.filter(
                     post=self.object,
                     user=self.request.user
-                ).order_by('-creation_date')
+                ).select_related('user').order_by('-creation_date')
             else:
                 user_responses_to_this_post = Response.objects.filter(
                     post=self.object
-                ).order_by('-creation_date')
+                ).select_related('user').order_by('-creation_date')
             context['is_subscribed'] = is_subscribed
             context['user_responses_to_post'] = user_responses_to_this_post
         return context
@@ -218,7 +219,9 @@ class ResponseList(PermissionRequiredMixin, ListView):
 
     def get_queryset(self):
         profile = Profile.objects.get(user=self.request.user)
-        queryset = Response.objects.filter(post__author=profile)
+        queryset = Response.objects.filter(
+            post__author=profile
+        ).select_related('post', 'post__author', 'user')
         self.filterset = ResponseFilter(self.request.GET, queryset=queryset)
         if 'post' in self.filterset.form.fields:
             self.filterset.form.fields['post'].queryset = Post.objects.filter(author=profile)
@@ -306,9 +309,10 @@ class ResponseDelete(PermissionRequiredMixin, DeleteView):
         return context
 
 @login_required()
+@transaction.atomic
 def subscribe_to_category(request, category_id):
     category = Category.objects.get(id=category_id)
-    if not category.subscribers.filter(id = request.user.id).exists():
+    if not category.subscribers.filter(id=request.user.id).exists():
         category.subscribers.add(request.user)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
